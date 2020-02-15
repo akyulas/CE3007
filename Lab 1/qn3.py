@@ -34,41 +34,42 @@ def q3_5():
 
 def q3_4():
     numSamples = 36
-    A=0.95; w=2*np.pi/36
-    n = np.arange(0, numSamples, 1)
-    y1 = np.multiply(np.power(A, n), np.exp(1j * w * n))
-    
-    
-    # plotting in 2-D, the real and imag in the same figure
-    plt.figure(1)
-    plt.plot(n, y1[0:numSamples].real,'r--o')
-    plt.plot(n, y1[0:numSamples].imag,'g--o')
-    plt.xlabel('sample index n'); plt.ylabel('y[n]')
-    plt.title('Complex exponential (red=real) (green=imag)')
-    plt.grid()
-    plt.show()
-    
-    # plotting in polar, understand what the spokes are
-    plt.figure(2)
-    for x in y1:
-        plt.polar([0,np.angle(x)],[0,np.abs(x)],marker='o')
-    
-    plt.title('Polar plot showing phasors at n=0..N')
-    plt.show()
-    
-    # plotting 3D complex plane
-    plt.rcParams['legend.fontsize'] = 10
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    reVal = y1[0:numSamples].real
-    imgVal = y1[0:numSamples].imag
-    ax.plot(n,reVal, imgVal,  label='complex exponential phasor')
-    ax.scatter(n,reVal,imgVal, c='r', marker='o')
-    ax.set_xlabel('sample n')
-    ax.set_ylabel('real')
-    ax.set_zlabel('imag')
-    ax.legend()
-    plt.show()
+    A=0.95
+    for w in [2*np.pi/36, 2*np.pi/18]:
+        n = np.arange(0, numSamples, 1)
+        y1 = np.multiply(np.power(A, n), np.exp(1j * w * n))
+        
+        
+        # plotting in 2-D, the real and imag in the same figure
+        plt.figure(1)
+        plt.plot(n, y1[0:numSamples].real,'r--o')
+        plt.plot(n, y1[0:numSamples].imag,'g--o')
+        plt.xlabel('sample index n'); plt.ylabel('y[n]')
+        plt.title('Complex exponential (red=real) (green=imag)')
+        plt.grid()
+        plt.show()
+        
+        # plotting in polar, understand what the spokes are
+        plt.figure(2)
+        for x in y1:
+            plt.polar([0,np.angle(x)],[0,np.abs(x)],marker='o')
+        
+        plt.title('Polar plot showing phasors at n=0..N')
+        plt.show()
+        
+        # plotting 3D complex plane
+        plt.rcParams['legend.fontsize'] = 10
+        fig = plt.figure()
+        ax = fig.gca(projection='3d')
+        reVal = y1[0:numSamples].real
+        imgVal = y1[0:numSamples].imag
+        ax.plot(n,reVal, imgVal,  label='complex exponential phasor')
+        ax.scatter(n,reVal,imgVal, c='r', marker='o')
+        ax.set_xlabel('sample n')
+        ax.set_ylabel('real')
+        ax.set_zlabel('imag')
+        ax.legend()
+        plt.show()
 
 def q3_3():
      A=0.5; F=10; Phi = 0; Fs=60; sTime=0; eTime = 1 + 1/Fs
@@ -150,7 +151,6 @@ def q3_1_a():
 def main():
     q3_1_a()
     q3_1_b()
-    q3_1_c()
     q3_2()
     q3_3()
     q3_4()
