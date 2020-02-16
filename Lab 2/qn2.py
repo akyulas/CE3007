@@ -5,6 +5,14 @@ from scipy import signal
 
 ipcleanfilename = 'testIp_16bit.wav'
 
+def q2_5_f():
+    x = np.zeros(10, dtype=float)
+    x[0] = 1
+    B = [1, -0.7653668, 0.99999]
+    A = [1, -0.722744, 0.888622]
+    y_ifil = signal.lfilter(B, A, x)
+    print(y_ifil)
+
 def q2_5_d():
     ipnoisyfilename = 'helloworld_noisy_16bit.wav'
     _, sampleX_16bit = read_sound(ipnoisyfilename)
@@ -27,7 +35,7 @@ def q2_5_c():
     ipnoisyfilename = 'helloworld_noisy_16bit.wav'
     _, sampleX_16bit = read_sound(ipnoisyfilename)
     x = fnNormalize16BitToFloat(sampleX_16bit)
-    y = np.zeros(len(x), dtype=float)
+    y = c
     B = [1, -0.7653668, 0.99999]
     A = [1, -0.722744, 0.888622]
     for n in range(len(x)):
@@ -38,14 +46,16 @@ def q2_5_c():
         else:
             y[n] = 1 * x[n] + (-0.7653668) * x[n - 1] + 0.99999 * x[n - 2] - (-0.722744) * y[n - 1] - 0.888622 * y[n - 2]
     y_ifil = signal.lfilter(B, A, x)
-    for i in range(len(y)):
-        if y[i] == y_ifil[i]:
-            continue
-        else:
-            print("=================")
-            print(y[i])
-            print(y_ifil[i])
-            print("=================")
+    print(len(y_ifil))
+    print(len(y))
+    # for i in range(len(y)):
+    #     if y[i] == y_ifil[i]:
+    #         continue
+    #     else:
+    #         print("=================")
+    #         print(y[i])
+    #         print(y_ifil[i])
+    #         print("=================")
 
 def q2_5_a():
     ipnoisyfilename = 'helloworld_noisy_16bit.wav'
@@ -84,12 +94,16 @@ def q2_4_c():
     ax[0].pcolormesh(t1, f1, 10*np.log10(Sxx1))
     ax[1].pcolormesh(t2, f2, 10*np.log10(Sxx2))
     plt.show()
+    x_16bit = fnNormalizeFloatTo16Bit(x)
     y1_16bit = fnNormalizeFloatTo16Bit(y1)
     y2_16bit = fnNormalizeFloatTo16Bit(y2)
+    x_file_name = 'x_16bit.wav'
     y1_file_name = 'y1_16bit.wav'
     y2_file_name = 'y2_16bit.wav'
+    save_sound(x_file_name, 16000, x_16bit)
     save_sound(y1_file_name, 16000, y1_16bit)
     save_sound(y2_file_name, 16000, y2_16bit)
+    play_sound(x_file_name)
     play_sound(y1_file_name)
     play_sound(y2_file_name)
 
@@ -172,7 +186,7 @@ def q2_1_b():
 def main():
     # q2_1_b()
     # q2_3_a()
-    q2_5_d()
+    q2_5_f()
 
 if __name__ == "__main__":
     main()
