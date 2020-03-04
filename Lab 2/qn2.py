@@ -35,7 +35,7 @@ def q2_5_c():
     ipnoisyfilename = 'helloworld_noisy_16bit.wav'
     _, sampleX_16bit = read_sound(ipnoisyfilename)
     x = fnNormalize16BitToFloat(sampleX_16bit)
-    y = c
+    y = np.zeros(len(x), dtype=float)
     B = [1, -0.7653668, 0.99999]
     A = [1, -0.722744, 0.888622]
     for n in range(len(x)):
