@@ -13,27 +13,18 @@ def q2_5():
     print(np.allclose(list(y), list(expected_result)))
 
 def q2_4():
-    ipx_1 = [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
-    ipx_2 =  [1 , 1, 1, 1, 1, 1 ,1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    len_of_sample = len(ipx_1)
-    DTFS_result_1 = myDTFS(ipx_1, len_of_sample)
-    DTFS_magnitude_1 = [abs(result) for result in DTFS_result_1]
-    DTFS_phase_1 = [cmath.phase(result) for result in DTFS_result_1]
-    DTFS_result_2 = myDTFS(ipx_2, len_of_sample)
-    DTFS_magnitude_2 = [abs(result) for result in DTFS_result_2]
-    DTFS_phase_2 = [cmath.phase(result) for result in DTFS_result_2]
-    _, ax = plt.subplots(2, 1)
-    ax[0].stem(DTFS_magnitude_1)
-    ax[0].grid()
-    ax[1].stem(DTFS_phase_1)
-    ax[1].grid()
-    plt.show()
-    _, ax = plt.subplots(2, 1)
-    ax[0].stem(DTFS_magnitude_2)
-    ax[0].grid()
-    ax[1].stem(DTFS_phase_2)
-    ax[1].grid()
-    plt.show()
+    for N in [12, 24,48,96]:
+        ipx = [1, 1, 1, 1, 1, 1, 1]
+        ipx = np.pad(ipx, (0, N - len(ipx)), 'constant')
+        DTFS_result = myDTFS(ipx, N)
+        DTFS_magnitude = [abs(result) for result in DTFS_result]
+        DTFS_phase = [cmath.phase(result) for result in DTFS_result]
+        _, ax = plt.subplots(2, 1)
+        ax[0].stem(DTFS_magnitude)
+        ax[0].grid()
+        ax[1].stem(DTFS_phase)
+        ax[1].grid()
+        plt.show()
 
 def q2_3():
     N = 32
@@ -114,7 +105,7 @@ def q2_2_b():
     plt.show()
 
 def main():
-    q2_5()
+    q2_4()
 
 if __name__ == "__main__":
     main()
